@@ -19,6 +19,8 @@ router.use((req,res,next)=>{
 router.post('/',(req,res)=>{
     let form = new formidable.IncomingForm();
     let appName= req.params.appName;
+    let appIconUrl= req.params.appIconUrl;
+    let appInfo= req.params.appInfo;
     form.encoding = 'utf-8';		//设置编辑
     form.uploadDir = config.root+'public/upload/';	 //设置上传目录
     form.keepExtensions = true;	 //保留后缀
@@ -70,8 +72,8 @@ router.post('/',(req,res)=>{
                         applicationId:manifest.package,
                         appEName:appEName,
                         appCName:appCName,
-                        appIconUrl:'',
-                        appInfo:''
+                        appIconUrl:appIconUrl,
+                        appInfo:appInfo
                     };
                     let v={
                         versionCode:manifest.versionCode,
