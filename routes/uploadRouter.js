@@ -1,3 +1,6 @@
+/**
+ * 接受处理上传的apk文件
+ */
 var express=require('express'),
     router=express.Router(),
     config=require('../configs/config.js'),

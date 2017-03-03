@@ -1,5 +1,5 @@
 /**
- * Created by huangxiangkuan on 2017/2/10.
+ * version，用于手机端更新使用的url
  */
 var express=require('express');
 var router=express.Router();
