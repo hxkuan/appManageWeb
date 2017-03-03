@@ -38,7 +38,7 @@ function query_one(sql){
                 if (results.length>0){
                     resolve(results[0],fields);
                 }else {
-                    resolve({},fields);
+                    resolve(null,fields);
                 }
             });
         });
@@ -47,13 +47,28 @@ function query_one(sql){
 exports.query_one=query_one;
 
 
-exports.downloadInfo=(appEName)=>{
+exports.getCurrentAppInfo=(appEName)=>{
     let sql="SELECT i.id,i.applicationId,i.appEName,i.appCName,i.appIconUrl,i.appInfo,"+
         "v.id versionId,v.versionCode,v.versionName,v.versionInfo,v.uploadTime,v.apkUri url,v.apkSize "+
     "FROM app_apk_info i,app_apk_version v WHERE i.currentVersionId=v.id AND i.appEName='"+appEName+"'";
     return query_one(sql);
 }
+exports.getAppInfoById=(id)=>{
+    let sql="SELECT i.id,i.applicationId,i.appEName,i.appCName,i.appIconUrl," +
+      "i.appInfo,v.id versionId,v.versionCode,v.versionName,v.versionInfo,v.uploadTime," +
+      "v.apkUri url,v.apkSize, v.mainVersion FROM app_apk_info i,app_apk_version v WHERE v.appId=i.id AND " +
+      " v.id="+id;
+    return query_one(sql);
+}
 
+/**
+ * 返回
+ * 对应applicationId的app个数：idNum 和
+ * 对应appEName的app个数：appENameNum
+ * @param applicationId
+ * @param appEName
+ * @returns {Promise}
+ */
 exports.checkAppInfo=(applicationId,appEName)=>{
     let sql="SELECT a.idNum,b.appENameNum FROM "+
     "(SELECT COUNT(id) idNum FROM app_apk_info WHERE applicationId='"+applicationId+"') a,"+

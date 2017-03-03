@@ -3,7 +3,7 @@ var router = express.Router();
 
 var appRouter=require('./appRouter.js');
 var uploadRouter=require('./uploadRouter.js');
-var downloadRouter=require('./downloadRouter.js');
+var downloadRouter=require('./downloadPageRouter.js');
 var versionRouter=require('./versionRouter.js');
 
 /* GET home page. */
@@ -12,7 +12,7 @@ router.get('/', function(req, res, next) {
 });
 router.use('/app',appRouter);
 router.use('/upload',uploadRouter);
-router.use('/download',downloadRouter);
+router.use('/downloadpage',downloadRouter);
 router.use('/version',versionRouter);
 
 module.exports = router;

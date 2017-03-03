@@ -9,10 +9,10 @@ router.get('/:app',(req,res)=>{
     let appName=req.params.app;
     console.log(appName);
     if(!appName)return;
-    db.downloadInfo(appName).then((results,fields)=>{
+    db.getCurrentAppInfo(appName).then((results, fields)=>{
         res.json(results);
     }).catch((e)=>{
-        res.json({'error':e});
+        res.render('err',{errorCode:e.status,errorMsg: e.stack});
     })
 });
 
