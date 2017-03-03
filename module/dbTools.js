@@ -84,3 +84,16 @@ exports.insertAppVersion=(v,appId)=>{
     return query(sql);
 }
 
+/**
+ * 设置app的当前版本
+ * 1.设置VersionId
+ * 2.将对应的version中mainVersion设为值1
+ * @param id
+ * @param versionId
+ */
+exports.setCurrentVersionId=(id,versionId)=>{
+    let sql_v='UPDATE app_apk_info  SET currentVersionId='+versionId+' WHERE id='+id;
+    let sql_m='UPDATE app_apk_version  SET mainVersion=1 WHERE id='+versionId;
+    Promise.all(query(sql_v), query(sql_m));
+}
+

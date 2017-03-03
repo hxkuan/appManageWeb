@@ -18,12 +18,18 @@ exports.toUpperFirst= (str)=>{ // 正则法
   });
 }
 
+/**
+ * 获得后缀名
+ * @param name
+ * @returns {string}
+ */
 exports.ext=(name)=> {
   let val='';
   let arr=/\.[^\.]+$/.exec(name);
   if (arr && arr.length>0)val=arr[0];
   return val;
 }
+
 
 
 exports.getFileName=(fullName)=> {
