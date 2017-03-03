@@ -29,6 +29,7 @@ exports.query=query;
  * @returns {Promise}
  */
 function query_one(sql){
+    console.log('sql---'+sql);
     return new Promise((resolve,reject)=>{
         commonMethod(()=>{
             connection.query(sql, function (error, results, fields) {
