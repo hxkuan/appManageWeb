@@ -16,7 +16,7 @@ router.use((req,res,next)=>{
 router.post('/',(req,res)=>{
     let form = new formidable.IncomingForm();
     form.encoding = 'utf-8';		//设置编辑
-    form.uploadDir = '../public/upload/';	 //设置上传目录
+    form.uploadDir = config.root+'public/upload/';	 //设置上传目录
     form.keepExtensions = true;	 //保留后缀
     form.maxFieldsSize = 2 * 1024 * 1024;   //文件大小
     form.parse(req, function(err, fields, files) {
@@ -51,7 +51,7 @@ router.post('/',(req,res)=>{
                 let v={
                     versionCode:manifest.versionCode,
                     versionName:manifest.versionName,
-                    apkUrl:'http://'+req.host+':'+config.port+'/'+newPath
+                    apkUri:'/'+avatarName
                 };
                 db.insertAppVersionByApplicationId(v,manifest.package).then(()=>{
                     //TODO
@@ -71,7 +71,7 @@ router.post('/',(req,res)=>{
                     let v={
                         versionCode:manifest.versionCode,
                         versionName:manifest.versionName,
-                        apkUrl:'http://'+req.host+':'+config.port+'/'+newPath
+                        apkUri:'/'+avatarName
                     };
 
                     db.insertAppInfo(i).then((r)=>{

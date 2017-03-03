@@ -48,7 +48,7 @@ exports.query_one=query_one;
 
 exports.downloadInfo=(appEName)=>{
     let sql="SELECT i.id,i.applicationId,i.appEName,i.appCName,i.appIconUrl,i.appInfo,"+
-        "v.id versionId,v.versionCode,v.versionName,v.versionInfo,v.uploadTime,v.apkUrl url,v.apkSize "+
+        "v.id versionId,v.versionCode,v.versionName,v.versionInfo,v.uploadTime,v.apkUri url,v.apkSize "+
     "FROM app_apk_info i,app_apk_version v WHERE i.currentVersionId=v.id AND i.appEName='"+appEName+"'";
     return query_one(sql);
 }
@@ -68,17 +68,17 @@ exports.insertAppInfo=(i)=>{
 }
 
 exports.insertAppVersionByApplicationId=(v,applicationId)=>{
-    let sql="INSERT INTO app_apk_version (appId,versionCode,versionName,apkUrl,uploadTime) "+
+    let sql="INSERT INTO app_apk_version (appId,versionCode,versionName,apkUri,uploadTime) "+
     "VALUES ((SELECT i.id FROM app_apk_info i WHERE i.applicationId ='"+applicationId+"')," +
-        v.versionCode+",'"+v.versionName+"','"+v.apkUrl+"',NOW())";
+        v.versionCode+",'"+v.versionName+"','"+v.apkUri+"',NOW())";
     console.log(sql);
     return query(sql);
 }
 
 exports.insertAppVersion=(v,appId)=>{
-    let sql="INSERT INTO app_apk_version (appId,versionCode,versionName,apkUrl,uploadTime) "+
+    let sql="INSERT INTO app_apk_version (appId,versionCode,versionName,apkUri,uploadTime) "+
         "VALUES ("+
-        appId+"," +v.versionCode+",'"+v.versionName+"','"+v.apkUrl+"',NOW())";
+        appId+"," +v.versionCode+",'"+v.versionName+"','"+v.apkUri+"',NOW())";
     console.log(sql);
     return query(sql);
 }

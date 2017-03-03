@@ -1,5 +1,7 @@
 var config={};
-config.port=3000;
+config.root=__dirname+'/../';
+
+// config.port=3000;
 
 config.dbConfig={
     host     : '114.55.27.99',
