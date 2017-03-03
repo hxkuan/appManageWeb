@@ -46,6 +46,13 @@ function query_one(sql){
 }
 exports.query_one=query_one;
 
+exports.getAppList=()=>{
+    let sql='SELECT i.id,i.applicationId,i.appEName,i.appCName,' +
+      'i.appIconUrl,i.appInfo,v.id versionId,v.versionCode,v.versionName,' +
+      'v.versionInfo,v.uploadTime,v.apkUri url,v.apkSize FROM app_apk_info i,' +
+      'app_apk_version v WHERE i.currentVersionId=v.id';
+    return query(sql);
+}
 
 exports.getCurrentAppInfo=(appEName)=>{
     let sql="SELECT i.id,i.applicationId,i.appEName,i.appCName,i.appIconUrl,i.appInfo,"+
@@ -53,12 +60,24 @@ exports.getCurrentAppInfo=(appEName)=>{
     "FROM app_apk_info i,app_apk_version v WHERE i.currentVersionId=v.id AND i.appEName='"+appEName+"'";
     return query_one(sql);
 }
+
 exports.getAppInfoById=(id)=>{
     let sql="SELECT i.id,i.applicationId,i.appEName,i.appCName,i.appIconUrl," +
       "i.appInfo,v.id versionId,v.versionCode,v.versionName,v.versionInfo,v.uploadTime," +
       "v.apkUri url,v.apkSize, v.mainVersion FROM app_apk_info i,app_apk_version v WHERE v.appId=i.id AND " +
       " v.id="+id;
     return query_one(sql);
+}
+
+exports.getAppById=(id)=>{
+    let sql='SELECT * FROM app_apk_info i WHERE i.id='+id;
+    return query(sql);
+}
+
+
+exports.getVersionListByAppId=(appId)=>{
+    let sql='SELECT * FROM app_apk_version v WHERE v.appId='+appId;
+    return query(sql);
 }
 
 /**
