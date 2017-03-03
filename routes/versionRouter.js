@@ -5,8 +5,8 @@ var express=require('express');
 var router=express.Router();
 var db=require('../module/dbTools.js');
 
-router.get('/',(req,res)=>{
-    let appName=req.query.app;
+router.get('/:app',(req,res)=>{
+    let appName=req.params.app;
     console.log(appName);
     if(!appName)return;
     db.downloadInfo(appName).then((results,fields)=>{
