@@ -1,3 +1,7 @@
+/**
+ * app 宝管理页面
+ */
+
 var express = require('express');
 var router = express.Router();
 var db = require('../module/dbTools.js');
@@ -8,7 +12,7 @@ router.use((req, res, next)=> {
   next();
 });
 
-// 登陆后才能查看
+// app列表页（登陆后才能查看）
 router.get('/', (req, res)=> {
   // res.send('-----apk list-------');
   db.getAppList().then((results, fields)=> {
@@ -19,7 +23,7 @@ router.get('/', (req, res)=> {
 
 });
 
-// 登陆后才能看
+// app详情页（登陆后才能看）
 router.get('/detail', (req, res)=> {
   // res.send('-----apk detail-------');
   let id = req.query.id;
@@ -30,7 +34,7 @@ router.get('/detail', (req, res)=> {
   let verPro = db.getVersionListByAppId(id).then((results, fields)=> {
     parm.appVersions = results
   });
-  Promise.all(appPro,verPro).then(()=>res.json({data: parm})).catch((e)=> {
+  Promise.all([appPro,verPro]).then(()=>res.json({data: parm})).catch((e)=> {
     res.render('err', {errorCode: e.status, errorMsg: e.stack});
   })
 });

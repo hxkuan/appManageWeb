@@ -128,6 +128,6 @@ exports.insertAppVersion=(v,appId)=>{
 exports.setCurrentVersionId=(id,versionId)=>{
     let sql_v='UPDATE app_apk_info  SET currentVersionId='+versionId+' WHERE id='+id;
     let sql_m='UPDATE app_apk_version  SET mainVersion=1 WHERE id='+versionId;
-    Promise.all(query(sql_v), query(sql_m));
+    Promise.all([query(sql_v), query(sql_m)]);
 }
 
