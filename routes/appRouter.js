@@ -37,6 +37,7 @@ router.get('/detail', (req, res)=> {
     parm.appVersions = results
   });
   Promise.all([appPro,verPro]).then(()=>{
+    parm.apkDir=config.apkDir;
     res.render('appDetail',parm);
   }).catch((e)=> {
     res.render('err', {errorCode: e.status, errorMsg: e.stack});
