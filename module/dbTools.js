@@ -103,17 +103,17 @@ exports.insertAppInfo=(i)=>{
 }
 
 exports.insertAppVersionByApplicationId=(v,applicationId)=>{
-    let sql="INSERT INTO app_apk_version (appId,versionCode,versionName,apkUri,uploadTime) "+
+    let sql="INSERT INTO app_apk_version (appId,versionCode,versionName,apkUri,uploadTime,apkSize) "+
     "VALUES ((SELECT i.id FROM app_apk_info i WHERE i.applicationId ='"+applicationId+"')," +
-        v.versionCode+",'"+v.versionName+"','"+v.apkUri+"',NOW())";
+        v.versionCode+",'"+v.versionName+"','"+v.apkUri+"',NOW(),"+v.apkSize+")";
     console.log(sql);
     return query(sql);
 }
 
 exports.insertAppVersion=(v,appId)=>{
-    let sql="INSERT INTO app_apk_version (appId,versionCode,versionName,apkUri,uploadTime) "+
+    let sql="INSERT INTO app_apk_version (appId,versionCode,versionName,apkUri,uploadTime,apkSize) "+
         "VALUES ("+
-        appId+"," +v.versionCode+",'"+v.versionName+"','"+v.apkUri+"',NOW())";
+        appId+"," +v.versionCode+",'"+v.versionName+"','"+v.apkUri+"',NOW(),"+v.apkSize+")";
     console.log(sql);
     return query(sql);
 }

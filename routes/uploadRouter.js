@@ -58,11 +58,12 @@ router.post('/',(req,res)=>{
                 let v={
                     versionCode:manifest.versionCode,
                     versionName:manifest.versionName,
-                    apkUri:'/'+avatarName
+                    apkUri:'/'+avatarName,
+                    apkSize:files.upload.size
                 };
                 db.insertAppVersionByApplicationId(v,manifest.package).then(()=>{
                     //TODO
-                    res.json({'data':files,'uri':'/'+avatarName,'appEName':appEName});
+                    res.json({'data1':files,'uri':'/'+avatarName,'appEName':appEName});
                 });
             }else {
                 if (re. appENameNum>0){
@@ -78,7 +79,8 @@ router.post('/',(req,res)=>{
                     let v={
                         versionCode:manifest.versionCode,
                         versionName:manifest.versionName,
-                        apkUri:'/'+avatarName
+                        apkUri:'/'+avatarName,
+                        apkSize:files.upload.size
                     };
 
                     db.insertAppInfo(i).then((r)=>{
@@ -87,7 +89,7 @@ router.post('/',(req,res)=>{
                         });
                     }).then(()=>{
                         //TODO
-                        res.json({'data':files,'url':'/'+avatarName,'appEName':appEName,appCName:appCName});
+                        res.json({'data2':files,'url':'/'+avatarName,'appEName':appEName,appCName:appCName});
                     });
                 }
             }
