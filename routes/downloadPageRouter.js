@@ -18,7 +18,9 @@ router.get('/:app',(req,res)=>{
         promise= db.getCurrentAppInfo(app);
     }
     promise&&promise.then((results, fields)=>{
-        res.json({'query':req.query,'params':req.params.app,'results':results});
+        // res.json({'query':req.query,'params':req.params.app,'data':results});
+        if(null==results)res.render('err',{errorCode:'页面为空',errorMsg: "不存在该应用"});
+        else res.render('downloadPage',results);
     }).catch((e)=>{
         res.render('err',{errorCode:e.status,errorMsg: e.stack});
     });
