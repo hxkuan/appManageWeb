@@ -10,4 +10,5 @@ config.dbConfig={
     database : 'package'
 };
 
+config.apkDir='/upload'
 module.exports=config;

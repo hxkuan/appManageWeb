@@ -5,6 +5,7 @@
 var express = require('express');
 var router = express.Router();
 var db = require('../module/dbTools.js');
+var config=require('../configs/config')
 
 //路由使用的中间件
 router.use((req, res, next)=> {
@@ -16,7 +17,8 @@ router.use((req, res, next)=> {
 router.get('/', (req, res)=> {
   // res.send('-----apk list-------');
   db.getAppList().then((results, fields)=> {
-    res.render('appList',{data: results});
+    // res.json({data: results});
+    res.render('appList',{data: results,apkDir:config.apkDir});
   }).catch((e)=> {
     res.render('err', {errorCode: e.status, errorMsg: e.stack});
   });

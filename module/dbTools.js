@@ -35,7 +35,7 @@ function query_one(sql){
             connection.query(sql, function (error, results, fields) {
                 if (error) reject(error);
                 console.log('The solution is: ', results);
-                if (results.length>0){
+                if (results && results.length>0){
                     resolve(results[0],fields);
                 }else {
                     resolve(null,fields);
