@@ -16,7 +16,7 @@ router.use((req, res, next)=> {
 router.get('/', (req, res)=> {
   // res.send('-----apk list-------');
   db.getAppList().then((results, fields)=> {
-    res.json({data: results});
+    res.render('appList',{data: results});
   }).catch((e)=> {
     res.render('err', {errorCode: e.status, errorMsg: e.stack});
   });
@@ -34,7 +34,9 @@ router.get('/detail', (req, res)=> {
   let verPro = db.getVersionListByAppId(id).then((results, fields)=> {
     parm.appVersions = results
   });
-  Promise.all([appPro,verPro]).then(()=>res.json({data: parm})).catch((e)=> {
+  Promise.all([appPro,verPro]).then(()=>{
+    res.render('appDetail',parm);
+  }).catch((e)=> {
     res.render('err', {errorCode: e.status, errorMsg: e.stack});
   })
 });

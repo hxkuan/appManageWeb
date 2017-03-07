@@ -71,7 +71,7 @@ exports.getAppInfoById=(id)=>{
 
 exports.getAppById=(id)=>{
     let sql='SELECT * FROM app_apk_info i WHERE i.id='+id;
-    return query(sql);
+    return query_one(sql);
 }
 
 
